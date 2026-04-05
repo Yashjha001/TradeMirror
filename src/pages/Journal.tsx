@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { DashboardLayout } from '@/components/DashboardLayout'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
+import { DashboardLayout } from '../components/DashboardLayout'
+import { Button } from '../components/ui/button'
+import { Input } from '../components/ui/input'
+import { Card, CardHeader, CardTitle, CardContent } from '../components/ui/card'
 import { 
   Plus, 
   Search, 
@@ -16,9 +16,9 @@ import {
   AlertTriangle,
   Calendar
 } from 'lucide-react'
-import { supabase } from '@/lib/supabase'
-import { useAuthStore } from '@/store/useAuthStore'
-import { cn, formatDate } from '@/lib/utils'
+import { supabase } from '../lib/supabase'
+import { useAuthStore } from '../store/useAuthStore'
+import { cn, formatDate } from '../lib/utils'
 
 const Journal = () => {
   const { user } = useAuthStore()
@@ -27,9 +27,7 @@ const Journal = () => {
   const [searchQuery, setSearchQuery] = useState('')
 
   useEffect(() => {
-    if (user) {
-      fetchTrades()
-    }
+    fetchTrades()
   }, [user])
 
   const fetchTrades = async () => {

@@ -1,5 +1,5 @@
-import { Navbar } from '@/components/Navbar'
-import { Button } from '@/components/ui/button'
+import { Navbar } from '../components/Navbar'
+import { Button } from '../components/ui/button'
 import { Link } from 'react-router-dom'
 import { 
   ArrowRight, 
@@ -41,13 +41,13 @@ const Landing = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
-            <Button asChild size="lg" variant="gradient" className="h-14 px-8 text-lg rounded-xl">
-              <Link to="/register">
-                Start Your Journal Free <ArrowRight className="ml-2 h-5 w-5" />
+            <Button asChild size="lg" variant="gradient" className="h-14 px-8 text-lg rounded-xl shadow-lg glow-primary">
+              <Link to="/dashboard">
+                Explore Platform <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
             <Button asChild size="lg" variant="outline" className="h-14 px-8 text-lg rounded-xl border-white/10 bg-white/5 backdrop-blur-sm">
-              <Link to="/login">View Demo</Link>
+              <Link to="/journal/new">Try New Entry</Link>
             </Button>
           </div>
         </div>
@@ -107,11 +107,10 @@ const Landing = () => {
             <div className="relative z-10 max-w-2xl">
               <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to mirror your trading success?</h2>
               <p className="text-lg text-muted-foreground mb-8">
-                Join thousands of traders who are already using TradeMirror to build 
-                the discipline needed for long-term profitability.
+                Experience the power of AI-assisted trading reflections today. No credit card required to start your journey.
               </p>
-              <Button asChild size="lg" variant="gradient" className="rounded-xl px-10">
-                <Link to="/register">Create Your Account</Link>
+              <Button asChild size="lg" variant="gradient" className="rounded-xl px-10 shadow-lg glow-primary">
+                <Link to="/dashboard">Go to Dashboard</Link>
               </Button>
             </div>
           </div>

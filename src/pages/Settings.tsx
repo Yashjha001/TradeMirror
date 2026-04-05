@@ -1,8 +1,8 @@
-import { DashboardLayout } from '@/components/DashboardLayout'
-import { Card, CardHeader, CardTitle, CardContent, CardDescription, CardFooter } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { useAuthStore } from '@/store/useAuthStore'
+import { DashboardLayout } from '../components/DashboardLayout'
+import { Card, CardHeader, CardTitle, CardContent, CardDescription, CardFooter } from '../components/ui/card'
+import { Button } from '../components/ui/button'
+import { Input } from '../components/ui/input'
+import { useAuthStore } from '../store/useAuthStore'
 import { 
   User, 
   Shield, 
@@ -13,8 +13,8 @@ import {
   CheckCircle2
 } from 'lucide-react'
 import { useState } from 'react'
-import { useToast } from '@/components/ui/use-toast'
-import { cn } from '@/lib/utils'
+import { useToast } from '../components/ui/use-toast'
+import { cn } from '../lib/utils'
 
 const Settings = () => {
   const { profile, user } = useAuthStore()

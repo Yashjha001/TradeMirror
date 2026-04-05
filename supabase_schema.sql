@@ -18,7 +18,7 @@ create table if not exists profiles (
 -- TRADE_ENTRIES table
 create table if not exists trade_entries (
   id uuid default uuid_generate_v4() primary key,
-  user_id uuid references auth.users on delete cascade not null,
+  user_id uuid references auth.users on delete cascade,
   symbol text not null,
   instrument_type text, -- Crypto, Forex, Stocks, etc.
   entry_price numeric not null,
@@ -85,22 +85,35 @@ alter table subscriptions enable row level security;
 alter table payments enable row level security;
 
 -- Policies for Profiles
+drop policy if exists "Users can view own profile" on profiles;
 create policy "Users can view own profile" on profiles for select using (auth.uid() = id);
+
+drop policy if exists "Users can update own profile" on profiles;
 create policy "Users can update own profile" on profiles for update using (auth.uid() = id);
 
--- Policies for Trade Entries
-create policy "Users can view own trades" on trade_entries for select using (auth.uid() = user_id);
-create policy "Users can insert own trades" on trade_entries for insert with check (auth.uid() = user_id);
-create policy "Users can update own trades" on trade_entries for update using (auth.uid() = user_id);
-create policy "Users can delete own trades" on trade_entries for delete using (auth.uid() = user_id);
+-- Policies for Trade Entries (Allow Public Access for USP)
+drop policy if exists "Users can view own trades" on trade_entries;
+create policy "Users can view own trades" on trade_entries for select using (true);
+
+drop policy if exists "Users can insert own trades" on trade_entries;
+create policy "Users can insert own trades" on trade_entries for insert with check (true);
+
+drop policy if exists "Users can update own trades" on trade_entries;
+create policy "Users can update own trades" on trade_entries for update using (true);
+
+drop policy if exists "Users can delete own trades" on trade_entries;
+create policy "Users can delete own trades" on trade_entries for delete using (true);
 
 -- Policies for AI Insights
+drop policy if exists "Users can view own insights" on ai_insights;
 create policy "Users can view own insights" on ai_insights for select using (auth.uid() = user_id);
 
 -- Policies for Subscriptions
+drop policy if exists "Users can view own subscriptions" on subscriptions;
 create policy "Users can view own subscriptions" on subscriptions for select using (auth.uid() = user_id);
 
 -- Policies for Payments
+drop policy if exists "Users can view own payments" on payments;
 create policy "Users can view own payments" on payments for select using (auth.uid() = user_id);
 
 -- Function to handle new user profile creation
@@ -114,6 +127,7 @@ end;
 $$ language plpgsql security definer;
 
 -- Trigger for new user
+drop trigger if exists on_auth_user_created on auth.users;
 create trigger on_auth_user_created
   after insert on auth.users
   for each row execute procedure public.handle_new_user();

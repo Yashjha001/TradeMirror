@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
-import { Button } from '@/components/ui/button'
-import { useAuthStore } from '@/store/useAuthStore'
+import { Button } from './ui/button'
+import { useAuthStore } from '../store/useAuthStore'
 import { LogIn, UserPlus, LayoutDashboard } from 'lucide-react'
 
 export const Navbar = () => {
@@ -25,29 +25,12 @@ export const Navbar = () => {
         </div>
 
         <div className="flex items-center space-x-4">
-          {user ? (
-            <Button asChild variant="gradient" size="sm">
-              <Link to="/dashboard">
-                <LayoutDashboard className="mr-2 h-4 w-4" />
-                Dashboard
-              </Link>
-            </Button>
-          ) : (
-            <>
-              <Button asChild variant="ghost" size="sm">
-                <Link to="/login">
-                  <LogIn className="mr-2 h-4 w-4" />
-                  Login
-                </Link>
-              </Button>
-              <Button asChild variant="gradient" size="sm">
-                <Link to="/register">
-                  <UserPlus className="mr-2 h-4 w-4" />
-                  Get Started
-                </Link>
-              </Button>
-            </>
-          )}
+          <Button asChild variant="gradient" size="sm" className="shadow-lg glow-primary">
+            <Link to="/dashboard">
+              <LayoutDashboard className="mr-2 h-4 w-4" />
+              Go to Dashboard
+            </Link>
+          </Button>
         </div>
       </div>
     </nav>

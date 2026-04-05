@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { DashboardLayout } from '@/components/DashboardLayout'
-import { Button } from '@/components/ui/button'
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
+import { DashboardLayout } from '../components/DashboardLayout'
+import { Button } from '../components/ui/button'
+import { Card, CardHeader, CardTitle, CardContent } from '../components/ui/card'
 import { 
   ArrowLeft, 
   Trash2, 
@@ -16,9 +16,9 @@ import {
   Target,
   Zap
 } from 'lucide-react'
-import { supabase } from '@/lib/supabase'
-import { useToast } from '@/components/ui/use-toast'
-import { cn, formatDate, formatCurrency } from '@/lib/utils'
+import { supabase } from '../lib/supabase'
+import { useToast } from '../components/ui/use-toast'
+import { cn, formatDate, formatCurrency } from '../lib/utils'
 
 const TradeDetail = () => {
   const { id } = useParams()

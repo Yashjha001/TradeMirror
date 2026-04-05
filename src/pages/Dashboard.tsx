@@ -1,5 +1,7 @@
-import { DashboardLayout } from '@/components/DashboardLayout'
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
+import { DashboardLayout } from '../components/DashboardLayout'
+import { Card, CardHeader, CardTitle, CardContent } from '../components/ui/card'
+import { Button } from '../components/ui/button'
+import { Link } from 'react-router-dom'
 import { 
   TrendingUp, 
   TrendingDown, 
@@ -22,7 +24,7 @@ import {
   AreaChart,
   Area
 } from 'recharts'
-import { useAuthStore } from '@/store/useAuthStore'
+import { useAuthStore } from '../store/useAuthStore'
 
 const data = [
   { name: 'Mon', pnl: 400 },
@@ -64,7 +66,7 @@ const MetricCard = ({ title, value, subvalue, icon, color, trend }: {
   </Card>
 )
 
-import { cn } from '@/lib/utils'
+import { cn } from '../lib/utils'
 
 const Dashboard = () => {
   const { profile } = useAuthStore()

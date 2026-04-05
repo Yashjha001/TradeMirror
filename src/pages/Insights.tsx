@@ -1,5 +1,5 @@
-import { DashboardLayout } from '@/components/DashboardLayout'
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
+import { DashboardLayout } from '../components/DashboardLayout'
+import { Card, CardHeader, CardTitle, CardContent } from '../components/ui/card'
 import { 
   Sparkles, 
   BrainCircuit, 
@@ -12,7 +12,7 @@ import {
   CheckCircle2
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { cn } from '@/lib/utils'
+import { cn } from '../lib/utils'
 
 const Insights = () => {
   return (

@@ -77,17 +77,15 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         
-        {/* Protected Routes */}
-         <Route element={<ProtectedRoute />}>
-           <Route path="/dashboard" element={<Dashboard />} />
-           <Route path="/journal" element={<Journal />} />
-           <Route path="/journal/new" element={<NewEntry />} />
-           <Route path="/journal/:id" element={<TradeDetail />} />
-           <Route path="/analytics" element={<Analytics />} />
-           <Route path="/insights" element={<Insights />} />
-           <Route path="/settings" element={<Settings />} />
-           <Route path="/admin" element={<Admin />} />
-         </Route>
+        {/* Open Access Routes (Removed ProtectedRoute) */}
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/journal" element={<Journal />} />
+        <Route path="/journal/new" element={<NewEntry />} />
+        <Route path="/journal/:id" element={<TradeDetail />} />
+        <Route path="/analytics" element={<Analytics />} />
+        <Route path="/insights" element={<Insights />} />
+        <Route path="/settings" element={<Settings />} />
+        <Route path="/admin" element={<Admin />} />
 
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

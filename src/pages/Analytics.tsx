@@ -1,5 +1,5 @@
-import { DashboardLayout } from '@/components/DashboardLayout'
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
+import { DashboardLayout } from '../components/DashboardLayout'
+import { Card, CardHeader, CardTitle, CardContent } from '../components/ui/card'
 import { 
   BarChart, 
   Bar, 
@@ -26,7 +26,7 @@ import {
   AlertTriangle,
   Calendar
 } from 'lucide-react'
-import { cn } from '@/lib/utils'
+import { cn } from '../lib/utils'
 
 const monthlyData = [
   { name: 'Jan', profit: 1200, loss: 400 },

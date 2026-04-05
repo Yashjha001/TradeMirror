@@ -1,6 +1,6 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { useAuthStore } from '@/store/useAuthStore'
-import { Button } from '@/components/ui/button'
+import { useAuthStore } from '../store/useAuthStore'
+import { Button } from './ui/button'
 import { 
   LayoutDashboard, 
   BookOpen, 
@@ -14,7 +14,7 @@ import {
   User
 } from 'lucide-react'
 import { useState } from 'react'
-import { cn } from '@/lib/utils'
+import { cn } from '../lib/utils'
 
 interface SidebarItemProps {
   icon: React.ReactNode

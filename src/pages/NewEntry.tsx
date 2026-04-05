@@ -1,9 +1,9 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { DashboardLayout } from '@/components/DashboardLayout'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
+import { DashboardLayout } from '../components/DashboardLayout'
+import { Button } from '../components/ui/button'
+import { Input } from '../components/ui/input'
+import { Card, CardHeader, CardTitle, CardContent } from '../components/ui/card'
 import { 
   ArrowLeft, 
   Save, 
@@ -16,12 +16,13 @@ import {
   Target,
   Zap,
   Smile,
-  AlertTriangle
+  AlertTriangle,
+  BookOpen
 } from 'lucide-react'
-import { useToast } from '@/components/ui/use-toast'
-import { supabase } from '@/lib/supabase'
-import { useAuthStore } from '@/store/useAuthStore'
-import { cn } from '@/lib/utils'
+import { useToast } from '../components/ui/use-toast'
+import { supabase } from '../lib/supabase'
+import { useAuthStore } from '../store/useAuthStore'
+import { cn } from '../lib/utils'
 
 const NewEntry = () => {
   const navigate = useNavigate()
@@ -29,6 +30,9 @@ const NewEntry = () => {
   const { user } = useAuthStore()
   const [isLoading, setIsLoading] = useState(false)
   const [isAnalyzing, setIsAnalyzing] = useState(false)
+  const fileInputRef = useRef<HTMLInputElement>(null)
+  const [selectedFiles, setSelectedFiles] = useState<File[]>([])
+  const [previewUrls, setPreviewUrls] = useState<string[]>([])
 
   // Form state
   const [formData, setFormData] = useState({
@@ -74,11 +78,11 @@ const NewEntry = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!user) return
+    // if (!user) return // Removed restriction for direct access USP
     
     setIsLoading(true)
     const { error } = await supabase.from('trade_entries').insert({
-      user_id: user.id,
+      user_id: user?.id || null, // Allow null for anonymous demo entries
       symbol: formData.symbol,
       instrument_type: formData.instrument_type,
       entry_price: parseFloat(formData.entry_price),
@@ -129,6 +133,26 @@ const NewEntry = () => {
     }
     
     setIsAnalyzing(false)
+  }
+
+  const handleFileClick = () => {
+    fileInputRef.current?.click()
+  }
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files || [])
+    if (files.length > 0) {
+      setSelectedFiles(prev => [...prev, ...files])
+      
+      const newPreviews = files.map(file => URL.createObjectURL(file))
+      setPreviewUrls(prev => [...prev, ...newPreviews])
+    }
+  }
+
+  const removeFile = (index: number) => {
+    setSelectedFiles(prev => prev.filter((_, i) => i !== index))
+    URL.revokeObjectURL(previewUrls[index])
+    setPreviewUrls(prev => prev.filter((_, i) => i !== index))
   }
 
   return (
@@ -304,12 +328,40 @@ const NewEntry = () => {
                   <Upload className="h-5 w-5 mr-2 text-primary" /> Screenshots
                 </CardTitle>
               </CardHeader>
-              <CardContent className="pt-6">
-                <div className="border-2 border-dashed border-white/10 rounded-2xl p-12 text-center hover:border-primary/50 transition-colors cursor-pointer bg-white/5">
-                  <Upload className="h-10 w-10 mx-auto text-muted-foreground mb-4" />
+              <CardContent className="pt-6 space-y-4">
+                <input 
+                  type="file" 
+                  ref={fileInputRef} 
+                  onChange={handleFileChange} 
+                  multiple 
+                  accept="image/*" 
+                  className="hidden" 
+                />
+                
+                <div 
+                  onClick={handleFileClick}
+                  className="border-2 border-dashed border-white/10 rounded-2xl p-12 text-center hover:border-primary/50 transition-colors cursor-pointer bg-white/5 group"
+                >
+                  <Upload className="h-10 w-10 mx-auto text-muted-foreground mb-4 group-hover:text-primary transition-colors" />
                   <p className="text-sm font-medium">Click to upload trade screenshots</p>
                   <p className="text-xs text-muted-foreground mt-1">PNG, JPG up to 10MB</p>
                 </div>
+
+                {previewUrls.length > 0 && (
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-4">
+                    {previewUrls.map((url, index) => (
+                      <div key={index} className="relative group aspect-video rounded-xl overflow-hidden border border-white/10">
+                        <img src={url} alt="Preview" className="w-full h-full object-cover" />
+                        <button
+                          onClick={() => removeFile(index)}
+                          className="absolute top-2 right-2 p-1 bg-error rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                        >
+                          <X className="h-3 w-3 text-white" />
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </CardContent>
             </Card>
           </div>

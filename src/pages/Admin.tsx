@@ -1,5 +1,5 @@
-import { DashboardLayout } from '@/components/DashboardLayout'
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
+import { DashboardLayout } from '../components/DashboardLayout'
+import { Card, CardHeader, CardTitle, CardContent } from '../components/ui/card'
 import { 
   Users, 
   DollarSign, 
@@ -9,9 +9,9 @@ import {
   ArrowUpRight,
   ChevronRight
 } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { cn } from '@/lib/utils'
+import { Button } from '../components/ui/button'
+import { Input } from '../components/ui/input'
+import { cn } from '../lib/utils'
 
 const AdminDashboard = () => {
   return (
