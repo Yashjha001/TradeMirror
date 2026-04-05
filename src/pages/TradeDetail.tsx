@@ -38,7 +38,7 @@ const TradeDetail = () => {
     const { data, error } = await supabase
       .from('trade_entries')
       .select('*')
-      .eq('id', id)
+      .eq('id', id as string)
       .single()
 
     if (!error && data) {

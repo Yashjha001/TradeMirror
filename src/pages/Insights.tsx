@@ -5,13 +5,14 @@ import {
   BrainCircuit, 
   Zap, 
   TrendingUp, 
+  TrendingDown,
   AlertTriangle, 
   Target,
   ArrowRight,
   Lightbulb,
   CheckCircle2
 } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { Button } from '../components/ui/button'
 import { cn } from '../lib/utils'
 
 const Insights = () => {

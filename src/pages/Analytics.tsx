@@ -10,23 +10,16 @@ import {
   ResponsiveContainer, 
   PieChart, 
   Pie, 
-  Cell,
-  LineChart,
-  Line,
-  AreaChart,
-  Area
+  Cell
 } from 'recharts'
 import { 
   TrendingUp, 
   TrendingDown, 
   Target, 
-  Zap, 
-  BrainCircuit, 
   Smile,
   AlertTriangle,
-  Calendar
+  BarChart3
 } from 'lucide-react'
-import { cn } from '../lib/utils'
 
 const monthlyData = [
   { name: 'Jan', profit: 1200, loss: 400 },
@@ -122,7 +115,7 @@ const Analytics = () => {
                       paddingAngle={5}
                       dataKey="value"
                     >
-                      {setupData.map((entry, index) => (
+                      {setupData.map((_, index) => (
                         <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                       ))}
                     </Pie>

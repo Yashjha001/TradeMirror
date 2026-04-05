@@ -6,6 +6,7 @@ import {
   Activity, 
   ShieldCheck,
   Search,
+  Zap,
   ArrowUpRight,
   ChevronRight
 } from 'lucide-react'

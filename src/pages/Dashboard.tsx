@@ -4,7 +4,6 @@ import { Button } from '../components/ui/button'
 import { Link } from 'react-router-dom'
 import { 
   TrendingUp, 
-  TrendingDown, 
   Percent, 
   Zap, 
   BrainCircuit, 
@@ -14,8 +13,6 @@ import {
   History
 } from 'lucide-react'
 import { 
-  LineChart, 
-  Line, 
   XAxis, 
   YAxis, 
   CartesianGrid, 
@@ -25,6 +22,7 @@ import {
   Area
 } from 'recharts'
 import { useAuthStore } from '../store/useAuthStore'
+import { cn } from '../lib/utils'
 
 const data = [
   { name: 'Mon', pnl: 400 },
@@ -36,12 +34,11 @@ const data = [
   { name: 'Sun', pnl: 1500 },
 ]
 
-const MetricCard = ({ title, value, subvalue, icon, color, trend }: { 
+const MetricCard = ({ title, value, subvalue, icon, trend }: { 
   title: string, 
   value: string, 
   subvalue?: string, 
   icon: React.ReactNode, 
-  color: string,
   trend?: { value: string, up: boolean }
 }) => (
   <Card className="glass-card border-white/5 hover:border-white/10 transition-all overflow-hidden relative group">
@@ -66,8 +63,6 @@ const MetricCard = ({ title, value, subvalue, icon, color, trend }: {
   </Card>
 )
 
-import { cn } from '../lib/utils'
-
 const Dashboard = () => {
   const { profile } = useAuthStore()
 
@@ -86,7 +81,6 @@ const Dashboard = () => {
             value="+$2,450.00" 
             trend={{ value: "12.5% vs last week", up: true }}
             icon={<TrendingUp className="h-8 w-8" />}
-            color="success"
           />
           <MetricCard 
             title="Win Rate" 
@@ -94,21 +88,20 @@ const Dashboard = () => {
             subvalue="Last 30 trades"
             trend={{ value: "2.1%", up: true }}
             icon={<Percent className="h-8 w-8" />}
-            color="primary"
           />
           <MetricCard 
             title="Avg. Risk/Reward" 
             value="1:2.4" 
-            subvalue="Target: 1:3.0"
+            subvalue="Target: 1:3"
+            trend={{ value: "0.2", up: true }}
             icon={<Target className="h-8 w-8" />}
-            color="secondary"
           />
           <MetricCard 
-            title="Discipline Score" 
-            value="88/100" 
-            trend={{ value: "5%", up: false }}
+            title="AI Confidence" 
+            value="82%" 
+            subvalue="Across all entries"
+            trend={{ value: "4%", up: true }}
             icon={<BrainCircuit className="h-8 w-8" />}
-            color="accent"
           />
         </div>
 

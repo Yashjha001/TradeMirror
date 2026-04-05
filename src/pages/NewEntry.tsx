@@ -11,8 +11,6 @@ import {
   Upload, 
   Plus, 
   X,
-  TrendingUp,
-  TrendingDown,
   Target,
   Zap,
   Smile,
@@ -31,7 +29,6 @@ const NewEntry = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [isAnalyzing, setIsAnalyzing] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
-  const [selectedFiles, setSelectedFiles] = useState<File[]>([])
   const [previewUrls, setPreviewUrls] = useState<string[]>([])
 
   // Form state
@@ -98,7 +95,7 @@ const NewEntry = () => {
       mistakes,
       lessons,
       trade_date: new Date().toISOString(),
-    })
+    } as any)
 
     if (error) {
       toast({ variant: 'destructive', title: 'Error saving trade', description: error.message })
@@ -142,15 +139,12 @@ const NewEntry = () => {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files || [])
     if (files.length > 0) {
-      setSelectedFiles(prev => [...prev, ...files])
-      
       const newPreviews = files.map(file => URL.createObjectURL(file))
       setPreviewUrls(prev => [...prev, ...newPreviews])
     }
   }
 
   const removeFile = (index: number) => {
-    setSelectedFiles(prev => prev.filter((_, i) => i !== index))
     URL.revokeObjectURL(previewUrls[index])
     setPreviewUrls(prev => prev.filter((_, i) => i !== index))
   }

@@ -117,7 +117,7 @@ const Login = () => {
                 className="bg-white/5 border-white/10 h-11 focus-visible:ring-primary/50"
               />
               <div className="flex justify-end">
-                <Link to="/forgot-password" size="sm" className="text-sm text-primary hover:underline">
+                <Link to="/forgot-password" className="text-sm text-primary hover:underline">
                   Forgot password?
                 </Link>
               </div>

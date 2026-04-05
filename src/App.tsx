@@ -15,7 +15,6 @@ import Analytics from './pages/Analytics'
 import Insights from './pages/Insights'
 import Settings from './pages/Settings'
 import Admin from './pages/Admin'
-import { ProtectedRoute } from './components/ProtectedRoute'
 
 function App() {
   const { setUser, setProfile, setLoading, isLoading } = useAuthStore()
