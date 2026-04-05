@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 222 47% 9%;
+    --foreground: 210 40% 96%;
+
+    --card: 222 47% 12%;
+    --card-foreground: 210 40% 96%;
+
+    --popover: 222 47% 9%;
+    --popover-foreground: 210 40% 96%;
+
+    --primary: 211 100% 65%;
+    --primary-foreground: 222 47% 9%;
+
+    --secondary: 237 100% 75%;
+    --secondary-foreground: 210 40% 96%;
+
+    --muted: 217 19% 65%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 262 100% 77%;
+    --accent-foreground: 210 40% 96%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217 33% 17%;
+    --input: 217 33% 17%;
+    --ring: 211 100% 65%;
+
+    --radius: 14px;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+}
+
+.glass-card {
+  @apply bg-card/80 backdrop-blur-md border border-white/10;
+}
+
+.gradient-text {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-accent;
+}
+
+.gradient-btn {
+  @apply bg-gradient-to-r from-primary to-secondary hover:opacity-90 transition-opacity text-white font-semibold;
+}
+
+.glow-primary {
+  box-shadow: 0 0 20px -5px rgba(77, 163, 255, 0.4);
+}
+
+.glow-accent {
+  box-shadow: 0 0 20px -5px rgba(181, 140, 255, 0.4);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-background;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-muted/20 rounded-full hover:bg-muted/30;
+}
