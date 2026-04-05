@@ -1,5 +1,6 @@
 import { DashboardLayout } from '../components/DashboardLayout'
 import { Card, CardHeader, CardTitle, CardContent } from '../components/ui/card'
+// Final cleanup to ensure no duplicate imports
 import { 
   BarChart, 
   Bar, 
