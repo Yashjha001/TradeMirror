@@ -218,6 +218,4 @@ const StatCard = ({ label, value, subtext, icon }: { label: string, value: strin
   </Card>
 )
 
-import { BarChart3 } from 'lucide-react'
-
 export default Analytics
